@@ -1,0 +1,5 @@
+spring.datasource:
+url: "jdbc:postgresql://localhost:5432/gb_shop_2"
+#driverClassName: "org.postgresql.Driver"
+username: "postgres"
+password: "geek"
