@@ -4,11 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import ru.gb.rest.dto.ProductDto;
+import ru.gb.rest.entity.Cart;
 import ru.gb.rest.entity.Product;
 import ru.gb.rest.service.ProductService;
 
@@ -23,6 +25,7 @@ import java.util.stream.Collectors;
 public class ProductController {
 
     private final ProductService productService;
+    Cart cart = new Cart();
 
     @GetMapping
     public List<Product> getProductList(){
@@ -62,6 +65,23 @@ public class ProductController {
         productService.deleteById(id);
     }
 
+    // DZ_9
+    @GetMapping("/cart")
+    public List<Product> getProductListFromCart(){
+        return productService.findAllInCart();
+    }
+
+    @GetMapping("/cart/add/{productId}")
+    public List<Product> addProductToCart(@PathVariable("productId") Long id){
+        productService.addProductToCart(id);
+        return productService.findAllInCart();
+    }
+
+    @DeleteMapping("/cart/delete/{productId}")
+    public List<Product> deleteProductFromCartById(@PathVariable("productId") Long id){
+        productService.deleteProductFromCart(id);
+        return productService.findAllInCart();
+    }
 
 
 }

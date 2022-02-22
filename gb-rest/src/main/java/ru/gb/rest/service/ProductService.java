@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import ru.gb.rest.dao.ProductDao;
-//import ru.gb.rest.entity.Cart;
+import ru.gb.rest.entity.Cart;
 import ru.gb.rest.dto.ProductDto;
 import ru.gb.rest.entity.Product;
 import ru.gb.rest.entity.enums.Status;
@@ -24,7 +24,7 @@ import java.util.Optional;
 public class ProductService {
 
     private final ProductDao productDao;
-//    Cart cart = new Cart();
+    Cart cart = new Cart();
 
     public ProductDto save(ProductDto productDto) {
         Product savingProduct;
@@ -72,20 +72,20 @@ public class ProductService {
         );
     }
 
-//    // DZ_8
-//    public List<Product> findAllInCart(){
-//        return  cart.getProducts();
-//    }
-//
-//    public void addProductToCart(Long id){
-//        Product product = productDao.findById(id).orElse(null);
-//        cart.addProduct(product);
-//    }
-//
-//    public void deleteProductFromCart(Long id){
-//        Product product = productDao.findById(id).orElse(null);
-//        cart.deleteProduct(product);
-//    }
+    // DZ_8
+    public List<Product> findAllInCart(){
+        return  cart.getProducts();
+    }
+
+    public void addProductToCart(Long id){
+        Product product = productDao.findById(id).orElse(null);
+        cart.addProduct(product);
+    }
+
+    public void deleteProductFromCart(Long id){
+        Product product = productDao.findById(id).orElse(null);
+        cart.deleteProduct(product);
+    }
 
 
 
